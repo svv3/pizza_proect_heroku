@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>All ingredients</h3>
+    {% for _id, name, price in ingr: %}
+    <p><a>{{_id}}. {{name}} : {{price}} ₴</a></p>
+    {% endfor %}
+    <br/><br/>
+    <h3>Change ingredients</h3>
+    <form action="{{url_for('change_ingr')}}" method="post">
+        <p>Id: <input type=text name=ingr_id></p>
+        <p>Name: <input type=text name=ingr_name></p>
+        <p>Price: <input type=text name=ingr_price></p>
+        <p><input type=submit value=CHANGE></p>
+    </form>
+    <br/><br/>
+    <h3>Delete ingredients</h3>
+    <form action={{url_for('delete_ingr')}} method=post>
+        <p>Id: <input type=text name=ingr_id></p>
+        <p><input type=submit value=DELETE></p>
+    </form>
+</body>
+</html>

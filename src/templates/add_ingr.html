@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>Add new ingredients</h3>
+    {% if error%}
+        <p style="color:#ff0000">{{error}}</p>
+    {% endif %}
+    <form action="{{url_for('add_ingr')}}" method="post">
+        <p>Name: <input type=text name=name></p>
+        <p>Price: <input type=text name=price></p>
+        <p><input type=submit value=Share></p>
+     </form>
+</body>
+</html>

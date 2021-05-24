@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .item {
+        display: inline-flex;
+        }
+        .colortext {
+        color: navy;
+        padding: 1px;
+        display: inline;
+        }
+    </style>
+</head>
+<body>
+    {% if not session.logged_in %}
+        <div>
+            <div class="item"><p><input type=button value="LOG IN" onClick='location.href="/login"'></p></div>
+            <div class="item"><p><input type=button value="ALL ORDERS" onClick='location.href="/show_orders"'></p></div>
+        </div>
+    {% else %}
+        <div>
+            <div class="item"><p><input type=button value="LOGOUT" onClick='location.href="/logout"'></p></div>
+            <div class="item"><p><input type=button value="ADD NEW PIZZA" onClick='location.href="/add_pizza"'></p></div>
+            <div class="item"><p><input type=button value="ADD NEW INGREDIENTS" onClick='location.href="/add_ingr"'></p></div>
+            <div class="item"><p><input type=button value="CHANGE OR DELETE INGREDIENTS" onClick='location.href="/change_or_del_ingr"'></p></div>
+            <div class="item"><p><input type=button value="ALL ORDERS" onClick='location.href="/show_orders"'></p></div>
+        </div>
+    {% endif %}
+    <h1>FAMILY PIZZA</h1>
+    {% for key, pizza in pizzas.items() %}
+    <font size="5"><p><a href="{{url_for('show_pizza', pizza_id=key)}}"><span class="colortext">{{pizza.name}}</span></a></p></font>
+    <p><a> Price {{pizza.price}} ₴</a></p>
+    <p><a> <img src="{{pizza.image}}"width="400" height="255"/></a></p>
+    <br/><br/>
+    {% endfor %}
+    <h1>Ingredients</h1>
+    {% for key, ingred in ingr.items() %}
+    <font size="5"><p><a>{{ingred.name}} : {{ingred.price}} ₴</a></p></font>
+    {% endfor %}
+</body>
+</html>

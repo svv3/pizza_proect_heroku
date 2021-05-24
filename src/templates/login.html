@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>Login</h3>
+    {% if error%}
+        <p style="color:#ff0000">{{error}}</p>
+    {% endif %}
+    <form action="{{url_for('login')}}" method=post>
+        <p>Username: <input type=text name=username></p>
+        <p>Password: <input type=password name=password></p>
+        <input type=submit value="Ok">
+    <form>
+</body>
+</html>

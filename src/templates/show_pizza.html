@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if not session.logged_in %}
+    <h1>Pizza</h1>
+    <h2>{{pizza.name}}</h2>
+    <font size="4"><p>Pizza composition: {{pizza.description}} </p></font>
+    <font size="4"><p>Price: {{pizza.price}} ₴</p></font>
+    <p><a> <img src="../{{pizza.image}}"width="400" height="255"/></a></p>
+    <form action="{{url_for('create_order', pizza_id=pizza.pizza_id)}}" method=post>
+    <p><input type=hidden name=pizza_name value={{pizza.name}}></p>
+    <p><input type=hidden name=pizza_price value={{pizza.price}}></p>
+    <p><b>Additional ingredients:</b></p>
+    {% for key, ingre in ingred.items() %}
+        <p><input type="checkbox" name="ingredient.{{ingre.name}}" value="{{ingre.price}}">{{ingre.name}}: {{ingre.price}} ₴</p>
+    {% endfor %}
+    <p><input type=submit value=ORDER></p>
+    </form>
+    {% endif %}
+    {% if session.logged_in %}
+    <h1>Pizza</h1>
+    <h2>{{pizza.name}}</h2>
+    <p>Pizza composition: {{pizza.description}}</p>
+    <p>Price: {{pizza.price}} ₴</p>
+    <p><a> <img src="../{{pizza.image}}"width="400" height="255"/></a></p>
+    <form action={{url_for('delete_pizza')}} method=post>
+        <p><input type=hidden name=pizza_id value={{pizza.pizza_id}}></p>
+        <p><input type=submit value=DELETE></p>
+    </form>
+    <br/><br/>
+    <h3>Change pizza</h3>
+    <form action="{{url_for('change_pizza')}}" method="post">
+        <p><input type=hidden name=pizza_id value={{pizza.pizza_id}}></p>
+        <p>Name: <input type=text name=pizza_name></p>
+        <p>Price: <input type=text name=pizza_price></p>
+        <p>Description: <textarea name=pizza_description></textarea></p>
+        <p>Path to images (for example: static/name.image): <input type=text name=pizza_image></p>
+        <p><input type=submit value=CHANGE></p>
+    </form>
+    {% endif %}
+</body>
+</html>

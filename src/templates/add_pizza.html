@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>Add new pizza</h3>
+    {% if error%}
+        <p style="color:#ff0000">{{error}}</p>
+    {% endif %}
+    <form action="{{url_for('add_pizza')}}" method="post">
+        <p>Name: <input type=text name=pizza_name></p>
+        <p>Description: <textarea name=pizza_description></textarea></p>
+        <p>Price: <input type=text name=pizza_price></p>
+        <p>Path to images (for example: static/name.image): <input type=text name=pizza_image></p>
+        <p><input type=submit value=SHARE></p>
+    </form>
+</body>
+</html>

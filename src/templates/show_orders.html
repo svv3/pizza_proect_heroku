@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .colortext {
+    background: #D9FFAD;
+    color: red;
+    padding: 1px;
+    display: inline;
+    }
+    .colortext1 {
+    background: #D9FFAD;
+    color: green;
+    padding: 1px;
+    display: inline;
+    }
+    .colortext2 {
+    background: #00ffff;
+    color: navy;
+    padding: 1px;
+    display: inline;
+    }
+    </style>
+</head>
+<body>
+    <p><input type=button value="ORDER MORE" onClick='location.href="/"'></p>
+    <h1>All orders</h1>
+    {% for key, ord in orders.items() %}
+    <p><a href="{{url_for('order', order_id=key)}}"><span class="colortext2"> Order: {{key}}</span></a></p>
+    <p><a>Pizza name: {{ord.name}} </a></p>
+    <p><a>Price: {{ord.price}} ₴</a></p>
+        {% if ord.status == "BAKED" %}
+        <p><a>Status: <span class="colortext"> {{ord.status}} </span> </a></p>
+        {% else %}
+        <p><a>Status: <span class="colortext1"> {{ord.status}} </span> </a></p>
+        {% endif %}
+    <br/><br/>
+    {% endfor %}
+    <br/><br/>
+    {% if session.logged_in %}
+    <h3>Delete order</h3>
+    <form action={{url_for('delete_order')}} method=post>
+        <p>Id: <input type=text name=order_id></p>
+        <p><input type=submit value=DELETE></p>
+    </form>
+    {% endif %}
+</body>
+</html>

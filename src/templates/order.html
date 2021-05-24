@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .b1 {
+    background: green;
+    color: white;
+    font-size: 10pt;
+    }
+    .b2 {
+    background: red;
+    color: white;
+    font-size: 10pt;
+    }
+    .colortext {
+    background: #D9FFAD;
+    color: red;
+    padding: 1px;
+    display: inline;
+    }
+    .colortext1 {
+    background: #D9FFAD;
+    color: green;
+    padding: 1px;
+    display: inline;
+    }
+    </style>
+</head>
+<body>
+    <h1>Order {{zakaz.order_id}}</h1>
+    <h2>{{zakaz.name}}</h2>
+    <p>Pizza composition: {{zakaz.pizza_description}} </p>
+    <p>Additional ingredients: {{zakaz.description}} </p>
+    <p>Price: {{zakaz.price}} ₴</p>
+        {% if zakaz.status == "BAKED" %}
+        <p><a>Status: <span class="colortext"> {{zakaz.status}} </span> </a></p>
+        {% else %}
+        <p><a>Status: <span class="colortext1"> {{zakaz.status}} </span> </a></p>
+        {% endif %}
+    {% if session.logged_in %}
+    <form action={{url_for('change_status')}} method=post>
+        <p><input type=hidden name=order_id value={{zakaz.order_id}}></p>
+        <p>Change status <input type=submit class="b1" value=COOKED></p>
+    </form>
+    <form action={{url_for('change_status_baked')}} method=post>
+        <p><input type=hidden name=order_id value={{zakaz.order_id}}></p>
+        <p>Change status <input type=submit class="b2"value=BAKED></p>
+    </form>
+    {% endif %}
+</body>
+</html>
